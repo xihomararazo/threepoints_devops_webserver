@@ -9,5 +9,4 @@ COPY src/index.js .
 
 EXPOSE 8090
 
-RUN ["chmod", "+x", "/usr/src/app/docker-entrypoint.sh"]
 CMD [ "node", "index.js" ]
