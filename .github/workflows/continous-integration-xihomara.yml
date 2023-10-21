@@ -27,6 +27,9 @@ jobs:
           echo "username=$USERNAME" >> credentials.ini
           echo "password=$PASSWORD" >> credentials.ini  
 
+      - name: Print current directory file list
+        run: ls -al
+
       - name: Build docker image
         run: docker build -t devops_ws . --tag devops_ws_$(date +%s)
-           
+        working-directory: . 
