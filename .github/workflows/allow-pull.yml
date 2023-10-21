@@ -20,9 +20,9 @@ jobs:
       - name: Check if allow_pull_request.txt exists
         run: |
           if [ -f allow_pull_request.txt ]; then
-            allow_pull=true
+            export allow_pull=true
           else
-            allow_pull=false
+            export allow_pull=false
           fi
           
       - name: Print allow_pull variable
