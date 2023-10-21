@@ -1,0 +1,36 @@
+name: Allow pull
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Análisis de SAST
+        run: echo "Realizando análisis de SAST"
+
+      - name: Check if allow_pull_request.txt exists
+        run: |
+          if [ -f allow_pull_request.txt ]; then
+            allow_pull=true
+          else
+            allow_pull=false
+          fi
+
+      - name: Imprimir mensaje
+        run: |
+          if [ "$allow_pull" == "true" ]; then
+            echo "Permitiendo Pull Request."
+          else
+            echo "Build fallida. Impidiendo Pull Request."
+            exit 1
+          fi
+
