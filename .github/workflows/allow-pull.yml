@@ -16,27 +16,23 @@ jobs:
 
       - name: Análisis de SAST
         run: echo "Realizando análisis de SAST"
-
-      - name: Check if allow_pull_request.txt exists
+          
+      - name: Check if allow_pull_request.txt exists and set environment variable
         run: |
           if [ -f allow_pull_request.txt ]; then
-            export allow_pull=true
+            echo "::set-env name=ALLOW_PULL::true"
           else
-            export allow_pull=false
+            echo "::set-env name=ALLOW_PULL::false"
           fi
-          
-      - name: Print allow_pull variable
-        run: echo "allow_pull=$allow_pull"
 
-      - name: Print current directory file list
-        run: ls -al
+      - name: Print allow_pull 
+        run: echo "allow_pull=${{ env.ALLOW_PULL }}"
 
       - name: Imprimir mensaje
         run: |
-          if [ "$allow_pull" == "true" ]; then
+           if [ "${{ env.ALLOW_PULL }}" == "true" ]; then
             echo "Permitiendo Pull Request."
           else
             echo "Build fallida. Impidiendo Pull Request."
             exit 1
           fi
-
