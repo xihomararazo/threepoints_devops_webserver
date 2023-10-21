@@ -24,14 +24,17 @@ jobs:
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
           
-      - name: Create INI file
+      - name: Create INI file 
         run: |
           echo "[Credentials]" > credentials.ini
           echo "username=$USERNAME" >> credentials.ini
           echo "password=$PASSWORD" >> credentials.ini  
-
-      - name: Print current directory file list
-        run: ls -al
+          
+      - name: Save credentials.ini as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: credentials-artifact
+          path: credentials.ini
 
       - name: Build docker image
         run: docker build -t devops_ws . --tag devops_ws_$(date +%s)
