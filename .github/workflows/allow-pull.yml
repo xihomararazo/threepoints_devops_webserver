@@ -1,11 +1,10 @@
 name: Allow pull
 
 on:
-  push:
-    branches:
-      - master
-      - 'hotfix*'
-      - 'feature*'
+  pull_request:
+    types:
+      - opened
+      - synchronize
 
 jobs:
   build:
