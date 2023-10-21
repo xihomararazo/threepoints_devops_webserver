@@ -30,7 +30,7 @@ jobs:
 
       - name: Imprimir mensaje
         run: |
-           if [ "${{ env.ALLOW_PULL }}" == "true" ]; then
+          if [ "${{ env.ALLOW_PULL }}" == "true" ]; then
             echo "Permitiendo Pull Request."
           else
             echo "Build fallida. Impidiendo Pull Request."
