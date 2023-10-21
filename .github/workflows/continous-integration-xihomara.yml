@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+      - 'hotfix*'
+      - 'feature*'
+
 
 jobs:
   build:
@@ -29,7 +32,7 @@ jobs:
           echo "[Credentials]" > credentials.ini
           echo "username=$USERNAME" >> credentials.ini
           echo "password=$PASSWORD" >> credentials.ini  
-          
+
       - name: Save credentials.ini as an artifact
         uses: actions/upload-artifact@v2
         with:
