@@ -24,6 +24,12 @@ jobs:
           else
             allow_pull=false
           fi
+          
+      - name: Print allow_pull variable
+        run: echo "allow_pull=$allow_pull"
+
+      - name: Print current directory file list
+        run: ls -al
 
       - name: Imprimir mensaje
         run: |
