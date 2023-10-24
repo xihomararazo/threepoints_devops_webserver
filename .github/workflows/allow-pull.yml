@@ -17,17 +17,17 @@ jobs:
       - name: Análisis de SAST
         run: echo "Realizando análisis de SAST"
 
-      - name: Get allow pull
-        id: allow-pull-var
-        run: |
-          if [ -f allow_pull_request.txt ]; then
-            ALLOW_PULL= true
-          else
-            ALLOW_PULL= false
-          fi
-          
-          echo "ALLOW_PULL=$ALLOW_PULL" >> $GITHUB_ENV
-          
+    - name: Get allow pull
+      id: allow-pull-var
+      run: |
+        if [ -f allow_pull_request.txt ]; then
+          ALLOW_PULL=true
+        else
+          ALLOW_PULL=false
+        fi
+        
+        echo "ALLOW_PULL=$ALLOW_PULL" >> $GITHUB_ENV
+
       - name: Imprimir mensaje
         env: 
           ALLOW_PULL: ${{ steps.allow-pull-var.outputs.ALLOW_PULL }}
