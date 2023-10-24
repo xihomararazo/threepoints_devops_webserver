@@ -5,36 +5,36 @@ on:
     types:
       - opened
       - synchronize
-      
+
 jobs:
-build:
-  runs-on: ubuntu-latest
-  
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Análisis de SAST
-      run: echo "Realizando análisis de SAST"
+      - name: Análisis de SAST
+        run: echo "Realizando análisis de SAST"
 
-    - name: Get allow pull
-      id: allow-pull-var
-      run: |
-        if [ -f allow_pull_request.txt ]; then
-          ALLOW_PULL=true
-        else
-          ALLOW_PULL=false
-        fi
-        
-        echo "ALLOW_PULL=$ALLOW_PULL" >> $GITHUB_ENV
-        
-    - name: Imprimir mensaje
-      env: 
-        ALLOW_PULL: ${{ steps.allow-pull-var.outputs.ALLOW_PULL }}
-      run: |
-        if [ "$ALLOW_PULL" == "true" ]; then
-          echo "Permitiendo Pull Request."
-        else
-          echo "Build fallida. Impidiendo Pull Request."
-          exit 1
-        fi
+      - name: Get allow pull
+        id: allow-pull-var
+        run: |
+          if [ -f allow_pull_request.txt ]; then
+            ALLOW_PULL=true
+          else
+            ALLOW_PULL=false
+          fi
+          
+          echo "ALLOW_PULL=$ALLOW_PULL" >> $GITHUB_ENV
+          
+      - name: Imprimir mensaje
+        env: 
+          ALLOW_PULL: ${{ steps.allow-pull-var.outputs.ALLOW_PULL }}
+        run: |
+          if [ "$ALLOW_PULL" == "true" ]; then
+            echo "Permitiendo Pull Request."
+          else
+            echo "Build fallida. Impidiendo Pull Request."
+            exit 1
+          fi
