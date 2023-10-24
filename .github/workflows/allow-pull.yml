@@ -21,9 +21,9 @@ jobs:
         id: allow-pull-var
         run: |
           if [ -f allow_pull_request.txt ]; then
-            ALLOW_PULL=true
+            ALLOW_PULL= true
           else
-            ALLOW_PULL=false
+            ALLOW_PULL= false
           fi
           
           echo "ALLOW_PULL=$ALLOW_PULL" >> $GITHUB_ENV
@@ -32,7 +32,7 @@ jobs:
         env: 
           ALLOW_PULL: ${{ steps.allow-pull-var.outputs.ALLOW_PULL }}
         run: |
-          if [ "$ALLOW_PULL" == "true" ]; then
+          if [ "$ALLOW_PULL" == true ]; then
             echo "Permitiendo Pull Request."
           else
             echo "Build fallida. Impidiendo Pull Request."
