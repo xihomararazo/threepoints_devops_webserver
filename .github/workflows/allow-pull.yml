@@ -32,7 +32,7 @@ jobs:
         env: 
           ALLOW_PULL: ${{ steps.allow-pull-var.outputs.ALLOW_PULL }}
         run: |
-          if [ "$ALLOW_PULL" == "true" ]; then
+          if [ $ALLOW_PULL == true ]; then
             echo "Permitiendo Pull Request."
           else
             echo "Build fallida. Impidiendo Pull Request."
