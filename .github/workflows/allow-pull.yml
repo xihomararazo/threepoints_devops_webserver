@@ -16,15 +16,19 @@ jobs:
 
       - name: Análisis de SAST
         run: echo "Realizando análisis de SAST"
-          
-      - name: Imprimir mensaje
+
+      - name: Get allow pull
+        id: allow-pull-var
         run: |
           if [ -f allow_pull_request.txt ]; then
-            allow_pull = true
+            "ALLOW_PULL = true"
           else
-            allow_pull = false
-          fi
-          if [ "$allow_pull" == "true" ]; then
+            "ALLOW_PULL = false"
+          fi    
+      - name: Imprimir mensaje
+        env: ALLOW_PULL: ${{steps.allow-pull-var.outputs.ALLOW_PULL}}
+        run: |
+          if [ "$ALLOW_PULL" == "true" ]; then
             echo "Permitiendo Pull Request."
           else
             echo "Build fallida. Impidiendo Pull Request."
