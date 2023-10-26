@@ -21,13 +21,11 @@ jobs:
         id: allow-pull-var
         run: |
           if [ -f allow_pull_request.txt ]; then
-            ALLOW_PULL=true
+            echo "ALLOW_PULL=true" >> $GITHUB_OUTPUT
           else
-            ALLOW_PULL=false
+            echo "ALLOW_PULL=false" >> $GITHUB_OUTPUT
           fi
           
-          echo "ALLOW_PULL=$ALLOW_PULL" >> $GITHUB_ENV
-
       - name: Imprimir mensaje
         env: 
           ALLOW_PULL: ${{ steps.allow-pull-var.outputs.ALLOW_PULL }}
