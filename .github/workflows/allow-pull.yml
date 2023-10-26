@@ -30,6 +30,7 @@ jobs:
         env: 
           ALLOW_PULL: ${{ steps.allow-pull-var.outputs.ALLOW_PULL }}
         run: |
+          echo "$ALLOW_PULL"
           if [ "$ALLOW_PULL" == true ]; then
             echo "Permitiendo Pull Request."
           else
